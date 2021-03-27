@@ -19,6 +19,10 @@ defmodule CronParser.MixProject do
     ]
   end
 
+  defp escript do
+    [main_module: CronParser.CLI]
+  end
+
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
