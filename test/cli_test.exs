@@ -2,10 +2,20 @@ defmodule CLI do
   use ExUnit.Case
 
   describe "Can react to commands" do
-    @args ["--help", "1", "2", "3"]
+    @args1 ["--help"]
+    @args2 ["--parse", "1", "2"]
+    @args3 ["--create", "1", "2", "3", "4", "5", "./"]
 
     test "reacts to the help flag" do
-      assert CronParser.parse(@args) == {[help: true], ["1", "2", "3"], []}
+      assert CronParser.parse(@args1) == {[help: true], ["1", "2", "3"], []}
+    end
+
+    test "reacts to parse flag" do
+      assert CronParser.parse(@args2) == {[parse: true], ["1", "2", "3"], []}
+    end
+
+    test "reacts to create flag" do
+      assert CronParser.parse(@args3) == {[create: true], ["1", "2", "3"], []}
     end
   end
 
