@@ -3,8 +3,8 @@ defmodule CronParser.ParserTest do
 
   describe "can parse a valid cron expression" do
 
-    test "can parse minutes" do
-      assert CronParser.Parser.parse("*/15", 60) == [0, 15, 30, 45]
+    test "can parse all intervals divisible by" do
+      assert CronParser.Parser.parse("*/15", 59) == [0, 15, 30, 45]
     end
   end
 
