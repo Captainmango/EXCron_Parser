@@ -25,6 +25,9 @@ defmodule CronParser.Parser do
         int_numbers = Enum.map(string_of_numbers, fn number -> String.to_integer(number) end)
         Enum.filter(int_numbers, fn x -> x <= interval end)
 
+      Regex.match?(~r/^\d+$/, cron_segment) ->
+        number = String.to_integer(cron_segment)
+        [number]
 
     end
   end
