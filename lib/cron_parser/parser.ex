@@ -13,6 +13,13 @@ defmodule CronParser.Parser do
         num2 = Enum.at(terms, 1) |> String.to_integer()
         Enum.filter(num1..num2, fn x -> x end)
 
+      Regex.match?(~r/^\*$/, cron_segment) ->
+        start = 1
+        unless interval > 31 do
+          start = 0
+        end
+        Enum.filter(start..interval, fn x -> x end)
+
     end
   end
 
