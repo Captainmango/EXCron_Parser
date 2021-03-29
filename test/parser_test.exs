@@ -1,12 +1,11 @@
-defmodule CronParser.Parser do
+defmodule CronParser.ParserTest do
   use ExUnit.Case
 
-  describe "it accepts a valid cron string" do
-    @cron ["*/15", "0", "1,15", "*", "1-5", "./"]
+  describe "can parse a valid cron expression" do
 
     test "can parse minutes" do
-      assert CronParser.Parser.parse(Enum.at(@cron, 0)) == {:ok, "*/15"}
+      assert CronParser.Parser.parse("*/15", 60) == [0, 15, 30, 45]
     end
-
   end
+
 end
