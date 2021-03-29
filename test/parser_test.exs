@@ -10,6 +10,10 @@ defmodule CronParser.ParserTest do
     test "can parse a range of intervals" do
       assert CronParser.Parser.parse("1-5", 7) == [1, 2, 3, 4, 5]
     end
+
+    test "can parse all possible intervals from a time period" do
+      assert CronParser.Parser.parse("*", 5) == [1, 2, 3, 4, 5]
+    end
   end
 
 end
