@@ -18,6 +18,10 @@ defmodule CronParser.ParserTest do
     test "can parse a range of values into a list" do
       assert CronParser.Parser.parse("1,2,3", 5) == [1, 2, 3]
     end
+
+    test "can handle digits" do
+      assert CronParser.Parser.parse("3", 7) == [3]
+    end
   end
 
 end
