@@ -6,6 +6,10 @@ defmodule CronParser.ParserTest do
     test "can parse all intervals divisible by" do
       assert CronParser.Parser.parse("*/15", 59) == [0, 15, 30, 45]
     end
+
+    test "can parse a range of intervals" do
+      assert CronParser.Parser.parse("1-5", 7) == [1, 2, 3, 4, 5]
+    end
   end
 
 end
