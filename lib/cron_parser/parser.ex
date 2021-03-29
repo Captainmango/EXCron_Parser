@@ -14,10 +14,7 @@ defmodule CronParser.Parser do
         Enum.filter(num1..num2, fn x -> x end)
 
       Regex.match?(~r/^\*$/, cron_segment) ->
-        start = 1
-        unless interval > 31 do
-          start = 0
-        end
+        start = case interval > 31 do true -> 0; _ ->  1 end
         Enum.filter(start..interval, fn x -> x end)
 
       Regex.match?(~r/[0-60](,[0-60])*/, cron_segment) ->
@@ -28,6 +25,9 @@ defmodule CronParser.Parser do
       Regex.match?(~r/^\d+$/, cron_segment) ->
         number = String.to_integer(cron_segment)
         [number]
+
+      true ->
+        IO.puts "no conditions matched"
 
     end
   end
