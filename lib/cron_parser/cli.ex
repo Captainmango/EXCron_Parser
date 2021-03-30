@@ -38,7 +38,6 @@ defmodule CronParser.CLI do
   def execute_command(list = ["--write" | _tail]) when length(list) == 3 do
     filepath = Enum.at(list, 1)
     IO.puts "writing file to #{filepath}"
-    receive_command()
   end
 
   def execute_command(list = ["--help"]) when length(list) == 1 do
