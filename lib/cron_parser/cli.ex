@@ -1,16 +1,18 @@
 defmodule CronParser.CLI do
   alias CronParser.Parser, as: Parser
-  def main(_args) do
-    header = ["test"]
-    rows = [
-    ["test1", Parser.parse("*", 10)]
-    ]
+  def main(args) do
+    args
+    |> parse_args
+    |> process_args
+  end
 
-    TableRex.quick_render!(rows, header, "Test")
-    |> IO.puts
+  def parse_args(args) do
+    {params, _, _} = OptionParser.parse(args, switches: [help: :boolean, write: :boolean, cron: :boolean])
+    params
+  end
 
-    print_commands
-
+  def process_args([help: true]) do
+    print_commands()
   end
 
   @commands %{
@@ -28,7 +30,11 @@ defmodule CronParser.CLI do
     |> execute_command
   end
 
-  defp execute_command("quit") do
+  defp execute_command(["quit"]) do
+    IO.puts "\n Closed parser"
+  end
+
+  defp execute_command(["write" | params]) do
     IO.puts "\n Closed parser"
   end
 
@@ -37,6 +43,7 @@ defmodule CronParser.CLI do
     @commands
     |> Enum.map(fn({command, description}) -> IO.puts(" #{command} - #{description} ") end)
     IO.puts "---"
+    receive_command()
   end
 
 end
