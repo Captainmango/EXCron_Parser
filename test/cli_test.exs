@@ -10,7 +10,7 @@ defmodule CLITest do
     end
 
     test "reacts to the help command" do
-      assert capture_io(fn -> CronParser.CLI.execute_command(["quit"]) end ) == "\n Closed parser\n"
+      assert capture_io(fn -> CronParser.CLI.execute_command(["--quit"]) end ) == "\n Closed parser\n"
     end
 
     test "can react to cron command" do
@@ -18,7 +18,7 @@ defmodule CLITest do
     end
 
     test "can react to the write command" do
-      assert capture_io(fn -> CronParser.CLI.execute_command() end ) == "Writing file to #{params}"
+      assert capture_io(fn -> CronParser.CLI.execute_command(["--write", "1", "2"]) end ) == "writing file to 1\n"
     end
   end
 
